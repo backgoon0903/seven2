@@ -1,9 +1,15 @@
+import Basiclayout from "../layout/Basiclayout.tsx";
+import React from "react";
+
+
 
 function MainPage() {
     return (
-        <div>
-            <div>Main Page</div>
-        </div>
+
+            <Basiclayout>
+                <div>Main Page</div>
+            </Basiclayout>
+
     );
 }
 
