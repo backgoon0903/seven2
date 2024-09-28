@@ -21,5 +21,11 @@ export const postTodo  = async (todo:ITodo) : Promise<number> => {
     const res = await axios.post(`${host}`, todo)
 
     return res.data.mno
+}
 
+export const getOne = async (mno : number) : Promise<ITodo> => {
+
+    const res = await axios.get(`${host}/${mno}`)
+
+    return res.data
 }

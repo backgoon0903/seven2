@@ -1,7 +1,9 @@
 import {useSearchParams} from "react-router-dom";
 import PageComponent from "./common/PageComponent.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {IPageResponse} from "../types/todo.ts";
+import {getTodoList} from "../api/todoAPI.tsx";
+import LoadingComponent from "./common/LoadingComponent.tsx";
 
 const initialState = {
     content : [],
@@ -20,18 +22,35 @@ function TodoListComponent() {
     const page : number = Number(query.get("page"))|| 1
     const size : number = Number(query.get("size"))|| 10
 
+    const [refresh, setRefresh] = useState<boolean>(false)
+    const [loading,setLoading]=useState<boolean>(false)
     const [pageResponse, setPageResponse] = useState<IPageResponse>(initialState)
+
+    useEffect(() => {
+        console.log("-------------")
+        setLoading(true)
+        getTodoList(page,size).then(data =>{
+            setPageResponse(data)
+            setLoading(false)
+        })
+
+    },[query,refresh])
 
     const changePage = (pageNum: number) => {
         console.log("click " +  pageNum)
+        query.set("page",String(pageNum))
+        setRefresh(!refresh)
+        setQuery(query)
     }
 
     return (
 
         <div>
+            {loading && <LoadingComponent></LoadingComponent>}
             <div>
             TodoListComponent
             </div>
+            <button onClick={() => changePage(1)}>1PAGE</button>
             <PageComponent pageResponse={pageResponse} changePage={changePage}/>
         </div>
     );
