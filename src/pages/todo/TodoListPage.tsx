@@ -1,13 +1,12 @@
-import {Outlet} from "react-router-dom";
+import TodoListComponent from "../../components/TodoListComponent.tsx";
 
 function TodoListPage() {
     return (
         <>
             <div>Todo List Page</div>
+            <TodoListComponent/>
 
-            <div>
-                <Outlet></Outlet>
-            </div>
+
         </>
     );
 }
