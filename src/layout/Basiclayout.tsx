@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
 
-function Basiclayout() {
+function Basiclayout({ children }: { children: React.ReactNode }) {
 
 
     return (
@@ -30,10 +30,12 @@ function Basiclayout() {
                         {/* <img src="https://via.placeholder.com/40" alt="User Profile" class="w-10 h-10 rounded-full"> */}
                     </div>
 
-
-
                 </div>
             </header>
+
+            <main>
+                {children}
+            </main>
         </>
     );
 }
